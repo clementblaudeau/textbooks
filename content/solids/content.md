@@ -71,47 +71,98 @@ Just like we’ve classified flat geometric shapes into a few categories like po
 __A polyhedron is a three-dimensional geometric solid with flat sides. The plural of polyhedron is “polyhedra”.__
 The word polyhedron comes from the Classical Greek as poly (many) + hedron (base, face)
 
-    // [TODO] INTERACTIVE: 3d solids examples
-    figure
-      // x-solid(size=300)
-      x-polyhedron(size=300 shape="Icosahedron")
+::: column.fit
+
+    x-polyhedron(size=200 shape="Cube")
+
+::: column.fit
+
+    x-polyhedron(size=200 shape="Octahedron")
+
+::: column.fit
+
+    x-polyhedron(size=200 shape="Dodecahedron")
+
+::: column.fit
+
+    x-polyhedron(size=200 shape="Tetrahedron")
+
+::: column.fit
+
+    x-polyhedron(size=200 shape="PentagonalPrism")
+
+::: column.fit
+
+    x-polyhedron(size=200 shape="StellatedDodecahedron")
+
+:::
 
 ---
+
+> id: poly-parts
 
 Polyhedra have many different shapes and sizes like polygons.
 They can be as simple as a cube or a pyramid, or as complex as a star polyhedron with lots of sides. 
 
     // Page 3
 
-    // [DISCUSS] INTERACTIVE: Polyhedra parts
+    // INTERACTIVE-1.01: Polyhedra parts
 
     // An interactive zoom-in tool to show the parts of the polyhedra with the definitions
 
-::: column.fit
-
-    figure: x-img(src="images/ch1_39.png" width="380" height="200")
-
-::: column.fit
-
-    figure: x-img(src="images/ch1_49.png" width="228" height="200")
-
-:::
+    figure: x-polyhedron(size=400 shape="Icosahedron" rotate=0)
 
     // Glossary links
 
-FACE:  The polygons that make up its surface of the polyhedron.
+FACE: The polygons that make up its surface of the polyhedron.
 EDGE: The line segments where two of its faces are connected.
 VERTEX: The “corners” of a polyhedron are called its vertices.
 
 ---
 
+> id: poly-ident
+
 Which of these solids are polyhedra?
 
-{.todo} INTERACTIVE: Polyhedra identification (3D)
+::: x-binary-swipe(a-title="Polyhedra" b-title="Not Polyhedra")
 
-There are also some 3D solids like cylinders and cones that contain curved surfaces, they are called non-polyhedra.
+::: div.card.c-teal(solution="a")
 
-{.todo} INTERACTIVE: non-polyhedra examples
+    figure: x-polyhedron(size=150 shape="OpenBox")
+
+:::
+
+::: div.card.c-green(solution="a")
+
+    figure: x-polyhedron(size=150 shape="AngularCylinder")
+
+:::
+
+::: div.card.c-orange(solution="b")
+
+    figure: x-solid.cone(size=150)
+
+:::
+
+::: div.card.c-blue(solution="b")
+
+    figure: x-solid.cylinder(size=150)
+
+:::
+
+::: div.card.c-yellow(solution="a")
+
+    figure: x-polyhedron(size=150 shape="Stair")
+
+:::
+
+::: div.card.c-teal(solution="b")
+
+    figure: x-solid.sphere(size=150)
+
+:::
+
+:::
 
 ---
 
@@ -119,9 +170,9 @@ Even though we live in a 3D world, grasping 3D shapes and their properties may b
 
     // Page 4
 
-::: column(width=200)
+::: column(width=300)
 
-{.todo} EMBED: Flatland trailer
+    <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/8675372?title=0&byline=0&portrait=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
 
     // http://www.flatlandthemovie.com/index.html
 
@@ -157,7 +208,7 @@ Try this puzzle now.
 
 Can you create 4 congruent triangles by using 6 toothpicks without bending or cutting them?
 
-    // TODO (LATER): INTERACTIVE: Toothpicks puzzle
+    // TODO (LATER): INTERACTIVE-1.02: Toothpicks puzzle
 
     figure: x-img(src="images/ch1_toothpicks.png" width="434" height="262")
 
@@ -246,6 +297,8 @@ As with a square being rectangle, a cube is a cuboid.
 A __cuboid__ is a box-shaped, where all six sides are rectangles. For example, pizza, cereal or shoe boxes are all cuboids.
 
 Cuboids are some of the most common polyhedra we use every day.
+
+    // TODO: INTERACTIVE-1.03: Cuboid with labeled parts
 
 ::: column.fit
 
@@ -343,6 +396,26 @@ According to a legend, there was a devastating plague in Greece in 430BC. The De
 
 :::
 
+::: column.grow
+
+{.todo} IMAGE
+
+Here is a line of __length 1__.
+
+::: column.grow
+
+{.todo} IMAGE
+
+A square where all sides have length 1 has __area 1__.
+
+::: column.grow
+
+{.todo} IMAGE
+
+A cube where all edges have length 1 has __volume 1__.
+
+:::
+
 We can find the volume of more complex shapes by determining how many cubes of volume 1 it contains. 
 
 The Apollo’s altar was a cubical temple with dimensions of five meters as its length, width, and height.
@@ -379,6 +452,7 @@ The first layer is a 5 x 5 square made up from [[25]] cubes.
 
     figure
       x-voxel-painter(width=300 height=300 shape="" playingFieldSize="5" rotateOnly hideGrid)
+    // TODO: Use slider
 
 There will be [[5]] layers of 25 cubes.
 There must be `5 x 25 = input(125)` cubes to fill the entire altar.
@@ -461,8 +535,6 @@ Multiplying three edge lengths allows us to determine the volume of cube efficie
 
     figure: x-img(src="images/ch1_29.png" width="92" height="87")
 
-    // TODO INTERACTIVE: cube
-
 :::
 
 A cube with an edge length of 3 centimeters has a volume of [[27]] cubic centimeters, which we can write as 27 cm3.
@@ -534,15 +606,24 @@ Volume= [[1]] x [[3]] x [[10]] = [[30]]
 
 :::
 
+---
+
+> id: painting-1
+> goals: vol
+
 Some cuboids may have the same volume although they have different shapes.
 
 ::: column
 
-{.todo} INTERACTIVE: Shape-making
+    // TODO: INTERACTIVE-1.04: Voxel-painting
+    figure
+      x-voxel-painter(width=300 height=300 targetVolume=24 playingFieldSize="10")
 
-::: column
+::: column.grow
 
 Use the unit cubes to create a cuboid so that the volume is 24 cubic units.
+
+---
 
 It is [[ not possible | possible]] to create a cube by using 24 unit cubes since 24 is not a perfect cube number.
 
@@ -554,7 +635,7 @@ How many different cuboids can you create by using 24 cubes?
 
 By finding the missing dimensions of the different cuboids with a volume of 24 cubic units, we can observe how the base area and the height change when we have a certain amount of cubes to create the volume.
 
-{.todo} Table
+{.todo} INTERACTIVE-1.05: Dimensions table
 
     // Page 14
 

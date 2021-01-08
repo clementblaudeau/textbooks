@@ -49,6 +49,11 @@ export class VoxelPainter extends CustomElementView {
   private explodeOnGrab!: boolean;
   private rotateOnly!: boolean;
 
+  private targetVolume?: number;
+
+  private onTargetVolumeMet?:
+    (voxels: [number, number, number][]) => void;
+
   private pointToExplodeFrom!: THREE.Vector3;
   private initialPositions!: THREE.Vector3[];
 
@@ -118,6 +123,8 @@ export class VoxelPainter extends CustomElementView {
     this.v1 = new THREE.Vector3();
     this.explodeOnGrab = this.hasAttr('explodeOnGrab');
     this.rotateOnly = this.hasAttr('rotateOnly') || this.explodeOnGrab;
+
+    this.targetVolume = +this.attr('targetVolume');
 
     const defaultGridDimension = 20;
     let gridDimension = (+this.attr('playingFieldSize')) || defaultGridDimension;
@@ -385,6 +392,9 @@ export class VoxelPainter extends CustomElementView {
                       this.objectsOnWhichVoxelsCanBePlaced,
                       this.scene!
                   ).position.copy(potentialNewPosition);
+                  if (this.getVolume() == this.targetVolume) {
+                    this.onTargetVolumeMet?.(this.voxelPositions);
+                  }
                 }
               }
             }
@@ -440,6 +450,17 @@ export class VoxelPainter extends CustomElementView {
     }
 
     this.updateApplet();
+  }
+
+  get voxelPositions(): [number, number, number][] {
+    return this.voxels.map(voxel => {
+      const pos = voxel.position;
+      return [pos.x, pos.y, pos.z];
+    });
+  }
+
+  onVolumeMet(fn: (positions: [number, number, number][]) => void) {
+    this.onTargetVolumeMet = fn;
   }
 
   private setFromVoxelIntersection(target: THREE.Vector3, intersection: THREE.Intersection) {
